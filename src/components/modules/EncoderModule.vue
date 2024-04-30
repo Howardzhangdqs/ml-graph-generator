@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, reactive, ref } from "vue";
 import MathDisplay from "../comp/MathDisplay.vue";
-import { BoundingClientRect2KeyPoints, type KeyPoint, type KeyPoints } from "./getModulePosition";
+import { BoundingClientRect2KeyPoints, type KeyPoints } from "./getModulePosition";
 
 const props = withDefaults(defineProps<{
     /** 模块名 */

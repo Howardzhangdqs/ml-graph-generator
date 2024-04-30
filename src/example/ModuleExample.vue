@@ -32,6 +32,10 @@
         <ModuleDisplay name="PositionalTensor">
             <PositionalTensor ref="refPositionalTensor" />
         </ModuleDisplay>
+
+        <ModuleDisplay name="NormalTensor">
+            <NormalTensor ref="refNormalTensor" />
+        </ModuleDisplay>
     </div>
     <div class="keypoints">
         <div class="keypoints-point" v-for="(point, key) in keypoints" :key="key" :style="{
@@ -52,6 +56,8 @@ import FunctionalModule from "@/components/modules/FunctionalModule.vue";
 import LayerBlock from "@/components/modules/LayerBlock.vue";
 import PositionalEncoding from "@/components/modules/PositionalEncoding.vue";
 import PositionalTensor from "@/components/modules/PositionalTensor.vue";
+import NormalTensor from "@/components/modules/NormalTensor.vue";
+
 import type { KeyPoints } from "@/components/modules/getModulePosition";
 
 
@@ -64,6 +70,7 @@ const refFunctionalModule = ref<any>();
 const refLayerBlock = ref<any>();
 const refPositionalEncoding = ref<any>();
 const refPositionalTensor = ref<any>();
+const refNormalTensor = ref<any>();
 
 const keypoints = reactive<KeyPoints>([]);
 
@@ -82,6 +89,8 @@ watchEffect(() => {
     AddKeyPoints(refEncoderModule1.value?.keypoints);
     AddKeyPoints(refEncoderModule2.value?.keypoints);
     AddKeyPoints(refEncoderModule3.value?.keypoints);
+    
+    AddKeyPoints(refNormalTensor.value?.keypoints);
 });
 </script>
 
