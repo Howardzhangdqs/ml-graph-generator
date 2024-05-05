@@ -11,6 +11,7 @@
 import { onMounted, onUnmounted, reactive, ref } from "vue";
 import { BoundingClientRect2KeyPoints, type KeyPoints } from "./getModulePosition";
 import noError from "@/utils/noError";
+import log from "@/utils/log";
 
 const refSelf = ref();
 
@@ -21,7 +22,7 @@ onMounted(() => {
         const domRect = (refSelf.value as HTMLDivElement).getBoundingClientRect();
         keypoints.length = 0;
         BoundingClientRect2KeyPoints(domRect, keypoints);
-        console.log(keypoints);
+        log(keypoints);
     });
 
     const resizeObserver = new ResizeObserver(ResizeCallback);
@@ -30,9 +31,9 @@ onMounted(() => {
 
     ResizeCallback();
 
-    onUnmounted(() => {
+    onUnmounted(noError(() => {
         resizeObserver.unobserve(refSelf.value as Element);
-    });
+    }));
 });
 
 defineExpose({

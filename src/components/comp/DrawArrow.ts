@@ -1,3 +1,4 @@
+import log from "@/utils/log";
 import { type KeyPoint } from "../modules/getModulePosition";
 import { isEmpty } from "lodash";
 
@@ -26,9 +27,9 @@ export const Routine2AbsRoutine = (
     endingPoint: Point,
     routine: Routine = [],
     convex: boolean = false
-): [Point[], Point[]] => {
+): [Routine, Routine] => {
     const currentPoint = [startingPoint[0], startingPoint[1]];
-    const res: Point[] = routine.map((point) => {
+    let res: Point[] = routine.map((point) => {
         currentPoint[0] += point[0];
         currentPoint[1] += point[1];
         return [currentPoint[0], currentPoint[1]];
@@ -36,6 +37,11 @@ export const Routine2AbsRoutine = (
     res.push(convex ? [currentPoint[0], endingPoint[1]] : [endingPoint[0], currentPoint[1]]);
     res.push([endingPoint[0], endingPoint[1]]);
 
+    // 如果res中相邻连个元素相同，就删掉一个
+    res = res.filter((point, index) => {
+        if (index === 0) return true;
+        return !(point[0] === res[index - 1][0] && point[1] === res[index - 1][1]);
+    });
 
     const res2: Point[] = [];
 
@@ -83,8 +89,10 @@ export default (
 
     if (isEmpty(startingPoint) || isEmpty(endingPoint)) return;
 
+    // 创建一个当前点，初始值为起点
     const currentPoint = [startingPoint[0], startingPoint[1]];
 
+    // 根据路线类型（直线或非直线）计算路线和路线2
     const [route, route2] = (routine !== "direct") ?
         Routine2AbsRoutine(startingPoint, endingPoint, routine, convex) :
         ([
@@ -94,8 +102,10 @@ export default (
 
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
+    // 初始化路径数据
     let d = `M ${currentPoint[0]} ${currentPoint[1]} `;
 
+    // 遍历路线，生成路径数据
     for (let i = 0; i < route.length - 1; i++) {
         d += `L ${route[i][0] - Number2PlusMinus(route2[i][0]) * radius} ${route[i][1] - Number2PlusMinus(route2[i][1]) * radius}`;
         const midPointX = route[i][0] + Number2PlusMinus(route2[i + 1][0]) * radius;
@@ -103,53 +113,80 @@ export default (
         d += `Q ${route[i][0]} ${route[i][1]}, ${midPointX} ${midPointY} `;
     }
 
+    // 添加路径的最后一个点
     d += `L ${route[route.length - 1][0]} ${route[route.length - 1][1]}`;
 
     path.setAttribute("d", d);
-
     path.setAttribute("stroke", "black");
     path.setAttribute("stroke-width", "2");
     path.setAttribute("fill", "none");
+
     svgdom.appendChild(path);
 
+    // 创建箭头
     if (arrow) {
         const arrow = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
-        const arrowLength = 10;
-        const arrowWidth = 5;
+        // 箭头的长度和宽度
+        const arrowLength = 8;
+        const arrowWidth = 3;
 
+        // 获取路径的最后一个方向
         const direction = route2[route2.length - 1];
 
-        const direction_size = Math.sqrt(direction[0] ** 2 + direction[1] ** 2);
+        // 计算箭头的角度
+        const angle = (Math.atan2(direction[1], direction[0]) * 180 / Math.PI);
 
-        const clipped_direction = [direction[0] / direction_size, direction[1] / direction_size];
+        log(angle, route2, direction);
 
-        const angle = Math.atan2(clipped_direction[1], clipped_direction[0]) * 180 / Math.PI;
-
-        const arrowPath = `M ${endingPoint[0] - arrowLength} ${endingPoint[1] - arrowWidth} L ${endingPoint[0]} ${endingPoint[1]} L ${endingPoint[0] - arrowLength} ${endingPoint[1] + arrowWidth}`;
+        const arrowPath = [
+            `M ${endingPoint[0] - arrowLength} ${endingPoint[1] - arrowWidth}`,
+            `L ${endingPoint[0]} ${endingPoint[1]}`,
+            `L ${endingPoint[0] - arrowLength} ${endingPoint[1] + arrowWidth}`,
+        ].join(" ");
 
         arrow.setAttribute("d", arrowPath);
         arrow.setAttribute("stroke", "black");
         arrow.setAttribute("stroke-width", "2");
         arrow.setAttribute("fill", "none");
-        arrow.setAttribute("transform", `rotate(${angle || 0} ${endingPoint[0]} ${endingPoint[1]})`);
+        arrow.setAttribute("transform", `rotate(${angle} ${endingPoint[0]} ${endingPoint[1]})`);
         svgdom.appendChild(arrow);
     }
 };
 
 
+/**
+ * Converts a PointDict object to a PointTuple tuple.
+ * @param point - A PointDict object with x and y properties.
+ * @returns A tuple containing x and y.
+ */
 export const PointDict2Tuple = (point: PointDict): PointTuple => {
     return [point.x, point.y];
 };
 
+/**
+ * Converts a PointTuple tuple to a PointDict object.
+ * @param point - A PointTuple tuple with x and y.
+ * @returns An object containing x and y.
+ */
 export const PointTuple2Dict = (point: PointTuple): PointDict => {
     return { x: point[0], y: point[1] };
 };
 
+/**
+ * Converts the pos property of a KeyPoint object to a PointTuple tuple.
+ * @param keyPoint - A KeyPoint object with a pos property.
+ * @returns A tuple containing pos.
+ */
 export const KeyPoint2Tuple = (keyPoint: KeyPoint): PointTuple => {
     return keyPoint.pos;
 };
 
+/**
+ * Converts the pos property of a KeyPoint object to a PointDict object.
+ * @param keyPoint - A KeyPoint object with a pos property.
+ * @returns An object containing pos.
+ */
 export const KeyPoint2Dict = (keyPoint: KeyPoint): PointDict => {
     return PointTuple2Dict(keyPoint.pos);
 };

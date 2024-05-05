@@ -1,5 +1,3 @@
-<!-- TODO: 修改为NxM，而不是一列 -->
-
 <template>
     <div class="normal-tensor" ref="refSelf" :style="{
         background: props.background,
@@ -21,6 +19,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, reactive, ref } from "vue";
 import { BoundingClientRect2KeyPoints, type KeyPoints } from "./getModulePosition";
+import noError from "@/utils/noError";
 
 const props = withDefaults(defineProps<{
     color?: string,
@@ -48,13 +47,12 @@ const refSelf = ref();
 
 const keypoints = reactive<KeyPoints>([]);
 
-onMounted(() => {
-    const ResizeCallback = () => {
-        // console.log("resize");
+onMounted(noError(() => {
+    const ResizeCallback = noError(() => {
         const domRect = (refSelf.value as HTMLDivElement).getBoundingClientRect();
         keypoints.length = 0;
         BoundingClientRect2KeyPoints(domRect, keypoints);
-    };
+    });
 
     const resizeObserver = new ResizeObserver(ResizeCallback);
 
@@ -65,7 +63,7 @@ onMounted(() => {
     onUnmounted(() => {
         resizeObserver.unobserve(refSelf.value as Element);
     });
-});
+}));
 
 defineExpose({
     keypoints

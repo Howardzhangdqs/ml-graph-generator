@@ -1,6 +1,8 @@
 <template>
-    <div class="functional-module" ref="refSelf">
-        <MathDisplay :content="props.name" :math="props.math" ref="mathDisplay" />
+    <div>
+        <div class="functional-module" ref="refSelf">
+            <MathDisplay :content="props.name" :math="props.math" ref="mathDisplay" />
+        </div>
     </div>
 </template>
 
@@ -8,6 +10,8 @@
 import { onMounted, onUnmounted, reactive, ref } from "vue";
 import MathDisplay from "../comp/MathDisplay.vue";
 import { BoundingClientRect2KeyPoints, type KeyPoints } from "./getModulePosition";
+import noError from "@/utils/noError";
+import log from "@/utils/log";
 
 const props = withDefaults(defineProps<{
     /** 模块名 */
@@ -28,13 +32,13 @@ const contentSize = ref(1000);
 
 // 监听mathDisplay长宽
 onMounted(() => {
-    const resizeObserver = new ResizeObserver((entries) => {
+    const resizeObserver = new ResizeObserver(noError((entries) => {
         for (const entry of entries) {
             const { width, height } = entry.contentRect;
             contentSize.value = Math.max(width, height);
-            console.log(contentSize.value);
+            log(contentSize.value);
         }
-    });
+    }));
 
     contentSize.value = Math.max(
         (mathDisplay.value?.dom as HTMLDivElement).offsetWidth as number ?? 0,
@@ -50,12 +54,12 @@ const refSelf = ref();
 const keypoints = reactive<KeyPoints>([]);
 
 onMounted(() => {
-    const ResizeCallback = () => {
+    const ResizeCallback = noError(() => {
         const domRect = (refSelf.value as HTMLDivElement).getBoundingClientRect();
         keypoints.length = 0;
         BoundingClientRect2KeyPoints(domRect, keypoints);
-        console.log(keypoints);
-    };
+        log(keypoints);
+    });
 
     const resizeObserver = new ResizeObserver(ResizeCallback);
 
@@ -63,9 +67,9 @@ onMounted(() => {
 
     ResizeCallback();
 
-    onUnmounted(() => {
+    onUnmounted(noError(() => {
         resizeObserver.unobserve(refSelf.value as Element);
-    });
+    }));
 });
 
 defineExpose({

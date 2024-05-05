@@ -1,12 +1,12 @@
 <template>
-    <!-- <TrapezoidalShape/> -->
-    <div class="encoder-block" ref="refSelf" :class="[`encoder-block-rotate-${props.rotate}`]">
-        <div class="triangle" :class="[`triangle1-rotate-${props.rotate}`]"></div>
-        <div :class="[`content-rotate-${props.rotate}`]" ref="content">
-            <MathDisplay :content="props.name" :math="props.math" />
+    <div>
+        <div class="encoder-block" ref="refSelf" :class="[`encoder-block-rotate-${props.rotate}`]">
+            <div class="triangle" :class="[`triangle1-rotate-${props.rotate}`]"></div>
+            <div :class="[`content-rotate-${props.rotate}`]" ref="content">
+                <MathDisplay :content="props.name" :math="props.math" />
+            </div>
+            <div class="triangle" :class="[`triangle2-rotate-${props.rotate}`]"></div>
         </div>
-        <div class="triangle" :class="[`triangle2-rotate-${props.rotate}`]"></div>
-
     </div>
 </template>
 
@@ -14,6 +14,8 @@
 import { onMounted, onUnmounted, reactive, ref } from "vue";
 import MathDisplay from "../comp/MathDisplay.vue";
 import { BoundingClientRect2KeyPoints, type KeyPoints } from "./getModulePosition";
+import noError from "@/utils/noError";
+import log from "@/utils/log";
 
 const props = withDefaults(defineProps<{
     /** 模块名 */
@@ -56,7 +58,7 @@ onMounted(() => {
 
     ResizeCallback();
 
-    console.log(content.value);
+    log(content.value);
 
     onUnmounted(() => {
         resizeObserver.unobserve(content.value as Element);
@@ -97,15 +99,15 @@ onMounted(() => {
         }
     };
 
-    const ResizeCallback = () => {
-        console.log("Encoder resize");
+    const ResizeCallback = noError(() => {
+        log("Encoder resize");
         domRect = (refSelf.value as HTMLDivElement).getBoundingClientRect();
         keypoints.length = 0;
         const raw_keypoints = BoundingClientRect2KeyPoints(domRect, []);
-        console.log(raw_keypoints);
+        log(raw_keypoints);
 
         keypoints.push(...KeyPoint2Rotate(raw_keypoints));
-    };
+    });
 
     const resizeObserver = new ResizeObserver(ResizeCallback);
 

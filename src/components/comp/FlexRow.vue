@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<{
     display: flex;
 
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
 
     gap: v-bind("props.gap");
 }

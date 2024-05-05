@@ -65,6 +65,7 @@ import type { KeyPoints } from "@/components/modules/getModulePosition";
 import DrawArrow, { KeyPoint2Tuple } from "@/components/comp/DrawArrow";
 
 import execImmediately from "@/utils/execImmediately";
+import log from "@/utils/log";
 
 
 const refNormalModule = ref<any>();
@@ -101,7 +102,7 @@ watchEffect(() => {
 
     AddKeyPoints(refNormalTensor.value?.keypoints);
 
-    console.log(canvas.value);
+    log(canvas.value);
 
     try {
 
@@ -121,14 +122,8 @@ const windowHeight = ref(window.innerHeight);
 window.addEventListener("resize", execImmediately(() => {
     windowWidth.value = window.innerWidth;
     windowHeight.value = window.innerHeight;
-    console.log(windowWidth.value, windowHeight.value);
+    log(windowWidth.value, windowHeight.value);
 }));
-
-// window.addEventListener("scroll", execImmediately(() => {
-//     windowWidth.value = window.innerWidth + window.scrollX;
-//     windowHeight.value = window.innerHeight + window.scrollY;
-//     console.log(windowWidth.value, windowHeight.value);
-// }));
 
 </script>
 

@@ -1,10 +1,10 @@
-export default <T extends (...args: any[]) => any>(fn: T): T => {
+export default <T extends (...args: any[]) => any>(fn: T, default_value: any = undefined): T => {
     return ((...args: any[]) => {
-        // catch the errors raised in fn
         try {
-            fn(...args);
+            return fn(...args);
         } catch (error) {
             console.error(error);
+            return default_value;
         }
     }) as unknown as T;
 };

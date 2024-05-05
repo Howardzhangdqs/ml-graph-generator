@@ -12,7 +12,7 @@ import NormalModule from "./NormalModule.vue";
 const props = withDefaults(defineProps<{
     color?: string,
 }>(), {
-    color: "#ff02",
+    color: "#ff01",
 });
 
 </script>

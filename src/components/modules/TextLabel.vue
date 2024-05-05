@@ -1,8 +1,6 @@
 <template>
-    <div>
-        <div class="normal-module" ref="refSelf">
-            <MathDisplay :content="props.name" :math="props.math" />
-        </div>
+    <div class="normal-module" ref="refSelf">
+        <MathDisplay :content="props.name" :math="props.math" />
     </div>
 </template>
 
@@ -11,28 +9,22 @@ import { onMounted, onUnmounted, reactive, ref } from "vue";
 import MathDisplay from "../comp/MathDisplay.vue";
 import { BoundingClientRect2KeyPoints, type KeyPoints } from "./getModulePosition";
 import noError from "@/utils/noError";
-import { useColorStore } from "@/stores/color";
 
 const props = withDefaults(defineProps<{
     /** 模块名 */
     name?: string,
 
-    color?: string,
-
     math?: boolean,
 }>(), {
     name: "Liner",
-    color: "default",
     math: false,
 });
-
-const colorStore = useColorStore();
 
 const refSelf = ref();
 
 const keypoints = reactive<KeyPoints>([]);
 
-onMounted(() => {
+onMounted(noError(() => {
     const ResizeCallback = noError(() => {
         const domRect = (refSelf.value as HTMLDivElement).getBoundingClientRect();
         keypoints.length = 0;
@@ -48,7 +40,7 @@ onMounted(() => {
     onUnmounted(noError(() => {
         resizeObserver.unobserve(refSelf.value as Element);
     }));
-});
+}));
 
 defineExpose({
     keypoints
@@ -57,13 +49,11 @@ defineExpose({
 
 <style scoped>
 .normal-module {
-    background-color: v-bind("props.color == 'default' ? colorStore.getColor(props.name) : props.color");
 
     padding: .2rem 1rem;
     /* margin: .5em; */
 
     border-radius: 0.5rem;
-    border: 2px solid #333;
 
     width: auto;
 }
