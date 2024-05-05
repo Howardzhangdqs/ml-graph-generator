@@ -37,9 +37,10 @@ watchEffect(noError(() => {
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(TransformerEncoder.value?.AddAndNorm2.keypoints ?? []).top,
+        listAdd(KeyPoints2Dictionary(TransformerEncoder.value?.AddAndNorm2.keypoints ?? []).top, [120, 93 - 25]),
         listAdd(KeyPoints2Dictionary(TransformerDncoder.value?.MultiHeadAttention.keypoints ?? []).bottom, [-40, 0]),
-        [[0, -25], [100, 0], [0, 93]]
+        [],
+        undefined, undefined, false
     );
 }));
 </script>

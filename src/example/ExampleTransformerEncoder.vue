@@ -73,7 +73,7 @@ watchEffect(noError(() => {
 
     DrawArrow(
         svg.value,
-        KeyPoints(InputText).top, KeyPoints(InputEmbedding).bottom,
+        KeyPoints(InputText.value).top, KeyPoints(InputEmbedding.value).bottom,
         "direct"
     );
 
