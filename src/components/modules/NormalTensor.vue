@@ -1,14 +1,20 @@
+<!-- TODO: 修改为NxM，而不是一列 -->
+
 <template>
     <div class="normal-tensor" ref="refSelf" :style="{
-        background   : props.background,
-        flexDirection: props.rotate === 0 ? 'row': 'column',
+        background: props.background,
     }">
-        <div class="normal-tensor-block" v-for="(item, key) in props.number" :key="key" :style="{
-            borderLeft: (props.rotate === 1 || key === 0) ? '2px solid ' + props.color: 'none',
-            borderTop : (props.rotate === 1 && key !== 0) ? 'none'                    : '2px solid ' + props.color,
-            width     : props.width,
-            height    : props.height,
-        }"></div>
+        <table class="normal-tensor-block">
+            <tr v-for="col in props.col" :key="col">
+                <td v-for="row in props.row" :key="row">
+                    <div :style="{
+                        width: props.width,
+                        height: props.height,
+                        // transform : `rotate(${props.rotate * 90}deg)`,
+                    }"></div>
+                </td>
+            </tr>
+        </table>
     </div>
 </template>
 
@@ -17,19 +23,25 @@ import { onMounted, onUnmounted, reactive, ref } from "vue";
 import { BoundingClientRect2KeyPoints, type KeyPoints } from "./getModulePosition";
 
 const props = withDefaults(defineProps<{
-    color     ?: string,
-    number    ?: number,
-    width     ?: string,
-    height    ?: string,
+    color?: string,
+
+    row?: number,
+    col?: number,
+
+    width?: string,
+    height?: string,
     background?: string,
-    rotate    ?: 0 | 1
+    rotate?: 0 | 1
 }>(), {
-    color     : "#000",
-    number    : 4,
-    width     : "18px",
-    height    : "20px",
+    color: "#000",
+
+    row: 4,
+    col: 1,
+
+    width: "18px",
+    height: "20px",
     background: "linear-gradient(145deg, rgb(217 250 255), rgb(109, 236, 255))",
-    rotate    : 0,
+    rotate: 0,
 });
 
 const refSelf = ref();
@@ -38,6 +50,7 @@ const keypoints = reactive<KeyPoints>([]);
 
 onMounted(() => {
     const ResizeCallback = () => {
+        // console.log("resize");
         const domRect = (refSelf.value as HTMLDivElement).getBoundingClientRect();
         keypoints.length = 0;
         BoundingClientRect2KeyPoints(domRect, keypoints);
@@ -60,15 +73,15 @@ defineExpose({
 </script>
 
 <style scoped>
-
 .normal-tensor {
     display: flex;
 }
 
-.normal-tensor-block {
-    border-left: 2px solid v-bind("props.color");
-    border-top: 2px solid v-bind("props.color");
-    border-bottom: 2px solid v-bind("props.color");
-    border-right: 2px solid v-bind("props.color");
+table,
+th,
+td {
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 0;
 }
 </style>

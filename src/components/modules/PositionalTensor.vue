@@ -10,18 +10,19 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, reactive, ref } from "vue";
 import { BoundingClientRect2KeyPoints, type KeyPoints } from "./getModulePosition";
+import noError from "@/utils/noError";
 
 const refSelf = ref();
 
 const keypoints = reactive<KeyPoints>([]);
 
 onMounted(() => {
-    const ResizeCallback = () => {
+    const ResizeCallback = noError(() => {
         const domRect = (refSelf.value as HTMLDivElement).getBoundingClientRect();
         keypoints.length = 0;
         BoundingClientRect2KeyPoints(domRect, keypoints);
         console.log(keypoints);
-    };
+    });
 
     const resizeObserver = new ResizeObserver(ResizeCallback);
 
@@ -41,8 +42,8 @@ defineExpose({
 
 <style scoped>
 .yin-yang {
-    width: 1.5em;
-    height: 1.5em;
+    width: 2.5em;
+    height: 2.5em;
     margin: auto;
     border: 2px solid black;
     border-radius: 50%;
@@ -58,7 +59,7 @@ defineExpose({
 
     border-radius: 50%;
     left: -2px;
-    top: 5px;
+    top: 9px;
     border: 2px solid #000;
     position: relative;
 
@@ -69,9 +70,9 @@ defineExpose({
     width: calc(50% - 1px);
     height: calc(50% - 1px);
 
-    right: -11px;
+    right: -19px;
     left: auto;
-    top: -10px;
+    top: -15px;
 
     border-radius: 50%;
 

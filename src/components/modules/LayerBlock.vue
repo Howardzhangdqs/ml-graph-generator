@@ -21,13 +21,17 @@ const props = withDefaults(defineProps<{
 .block-module {
     background-color: v-bind("props.color");
 
-    padding: .3rem .5rem;
+    padding: .5rem .8rem;
 
     border-radius: 0.7rem;
     border: 2px solid #333;
 
-    width: max-content;
+    width: max-content !important;
+    
+    display: flex;
 
-    /* margin: .5em; */
+    flex-direction: column;
+
+    gap: .5rem;
 }
 </style>

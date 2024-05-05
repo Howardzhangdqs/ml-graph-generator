@@ -98,6 +98,7 @@ onMounted(() => {
     };
 
     const ResizeCallback = () => {
+        console.log("Encoder resize");
         domRect = (refSelf.value as HTMLDivElement).getBoundingClientRect();
         keypoints.length = 0;
         const raw_keypoints = BoundingClientRect2KeyPoints(domRect, []);

@@ -1,48 +1,51 @@
 <template>
-    <div class="container">
-        <ModuleDisplay name="NormalModule">
-            <NormalModule ref="refNormalModule" />
-        </ModuleDisplay>
+    <Suspense>
+        <div class="container">
+            <ModuleDisplay name="NormalModule">
+                <NormalModule ref="refNormalModule" />
+            </ModuleDisplay>
 
-        <ModuleDisplay name="EncoderModule">
-            <EncoderModule ref="refEncoderModule0" />
-        </ModuleDisplay>
-        <ModuleDisplay name="EncoderModule">
-            <EncoderModule :rotate="1" ref="refEncoderModule1" />
-        </ModuleDisplay>
-        <ModuleDisplay name="EncoderModule">
-            <EncoderModule :rotate="2" ref="refEncoderModule2" />
-        </ModuleDisplay>
-        <ModuleDisplay name="EncoderModule">
-            <EncoderModule :rotate="3" ref="refEncoderModule3" />
-        </ModuleDisplay>
+            <ModuleDisplay name="EncoderModule">
+                <EncoderModule ref="refEncoderModule0" />
+            </ModuleDisplay>
+            <ModuleDisplay name="EncoderModule">
+                <EncoderModule :rotate="1" ref="refEncoderModule1" />
+            </ModuleDisplay>
+            <ModuleDisplay name="EncoderModule">
+                <EncoderModule :rotate="2" ref="refEncoderModule2" />
+            </ModuleDisplay>
+            <ModuleDisplay name="EncoderModule">
+                <EncoderModule :rotate="3" ref="refEncoderModule3" />
+            </ModuleDisplay>
 
-        <ModuleDisplay name="FunctionalModule">
-            <FunctionalModule ref="refFunctionalModule" />
-        </ModuleDisplay>
+            <ModuleDisplay name="FunctionalModule">
+                <FunctionalModule ref="refFunctionalModule" />
+            </ModuleDisplay>
 
-        <ModuleDisplay name="LayerBlock">
-            <LayerBlock ref="refLayerBlock" />
-        </ModuleDisplay>
+            <ModuleDisplay name="LayerBlock">
+                <LayerBlock ref="refLayerBlock" />
+            </ModuleDisplay>
 
-        <ModuleDisplay name="PositionalEncoding">
-            <PositionalEncoding ref="refPositionalEncoding" />
-        </ModuleDisplay>
+            <ModuleDisplay name="PositionalEncoding">
+                <PositionalEncoding ref="refPositionalEncoding" />
+            </ModuleDisplay>
 
-        <ModuleDisplay name="PositionalTensor">
-            <PositionalTensor ref="refPositionalTensor" />
-        </ModuleDisplay>
+            <ModuleDisplay name="PositionalTensor">
+                <PositionalTensor ref="refPositionalTensor" />
+            </ModuleDisplay>
 
-        <ModuleDisplay name="NormalTensor">
-            <NormalTensor ref="refNormalTensor" />
-        </ModuleDisplay>
-    </div>
+            <ModuleDisplay name="NormalTensor">
+                <NormalTensor ref="refNormalTensor" />
+            </ModuleDisplay>
+        </div>
+    </Suspense>
     <div class="keypoints">
         <div class="keypoints-point" v-for="(point, key) in keypoints" :key="key" :style="{
             left: point.pos[0] + 'px',
             top: point.pos[1] + 'px',
         }"></div>
     </div>
+    <svg class="mask" ref="canvas"></svg>
 </template>
 
 <script setup lang="ts">
@@ -59,6 +62,9 @@ import PositionalTensor from "@/components/modules/PositionalTensor.vue";
 import NormalTensor from "@/components/modules/NormalTensor.vue";
 
 import type { KeyPoints } from "@/components/modules/getModulePosition";
+import DrawArrow, { KeyPoint2Tuple } from "@/components/comp/DrawArrow";
+
+import execImmediately from "@/utils/execImmediately";
 
 
 const refNormalModule = ref<any>();
@@ -78,8 +84,11 @@ const AddKeyPoints = (_keypoints: KeyPoints | undefined) => {
     if (_keypoints) keypoints.push(..._keypoints);
 };
 
+const canvas = ref<HTMLCanvasElement>();
+
 watchEffect(() => {
     keypoints.length = 0;
+
     AddKeyPoints(refNormalModule.value?.keypoints);
     AddKeyPoints(refFunctionalModule.value?.keypoints);
     AddKeyPoints(refPositionalEncoding.value?.keypoints);
@@ -89,9 +98,38 @@ watchEffect(() => {
     AddKeyPoints(refEncoderModule1.value?.keypoints);
     AddKeyPoints(refEncoderModule2.value?.keypoints);
     AddKeyPoints(refEncoderModule3.value?.keypoints);
-    
+
     AddKeyPoints(refNormalTensor.value?.keypoints);
+
+    console.log(canvas.value);
+
+    try {
+
+        DrawArrow(canvas.value as unknown as SVGSVGElement,
+            KeyPoint2Tuple(refNormalModule.value?.keypoints[1]),
+            KeyPoint2Tuple(refEncoderModule0.value?.keypoints[1]),
+            [[0, 300], [300, 0]], undefined, undefined, true
+        );
+
+    } catch { /* Empty */ }
 });
+
+
+const windowWidth = ref(window.innerWidth);
+const windowHeight = ref(window.innerHeight);
+
+window.addEventListener("resize", execImmediately(() => {
+    windowWidth.value = window.innerWidth;
+    windowHeight.value = window.innerHeight;
+    console.log(windowWidth.value, windowHeight.value);
+}));
+
+// window.addEventListener("scroll", execImmediately(() => {
+//     windowWidth.value = window.innerWidth + window.scrollX;
+//     windowHeight.value = window.innerHeight + window.scrollY;
+//     console.log(windowWidth.value, windowHeight.value);
+// }));
+
 </script>
 
 <style scoped>
@@ -100,7 +138,7 @@ watchEffect(() => {
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
-
+    opacity: 0;
 }
 
 .keypoints {
@@ -118,5 +156,15 @@ watchEffect(() => {
     border-radius: 50%;
     background-color: #f00;
     transform: translate(-50%, -50%);
+}
+
+.mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: v-bind("`${windowWidth}px`");
+    height: v-bind("`${windowHeight}px`");
+    background-color: rgba(0, 0, 0, 0.527);
 }
 </style>

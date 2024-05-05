@@ -3,6 +3,8 @@
         <PositionalTensor />
         <div class="bar"></div>
         <FunctionalModule name="\boldsymbol{+}" ref="refFunctionalModule" />
+        <div class="bar none"></div>
+        <PositionalTensor class="none" />
     </div>
 </template>
 
@@ -43,5 +45,9 @@ defineExpose({
     width: 1.5rem;
     background-color: #333;
     margin: 0 -1px;
+}
+
+.none {
+    opacity: 0;
 }
 </style>

@@ -13,8 +13,10 @@
   },
   "dependencies": {
     "@types/katex": "^0.16.7",
+    "@types/lodash": "^4.17.0",
     "eslint-config-google": "^0.14.0",
     "katex": "^0.16.10",
+    "lodash": "^4.17.21",
     "pinia": "^2.1.7",
     "vue": "^3.4.21"
   },

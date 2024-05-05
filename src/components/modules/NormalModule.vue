@@ -59,6 +59,6 @@ defineExpose({
     border-radius: 0.5rem;
     border: 2px solid #333;
 
-    width: max-content;
+    width: auto;
 }
 </style>
