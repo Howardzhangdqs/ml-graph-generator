@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import ModuleExample from "./example/ModuleExample.vue";
-import ExampleTransformer from "./example/ExampleTransformer.vue";
 </script>
 
 <template>
-    <ExampleTransformer />
+    <router-view></router-view>
 </template>
 
 <style scoped></style>

@@ -73,7 +73,8 @@ onMounted(() => {
 });
 
 defineExpose({
-    keypoints
+    keypoints,
+    el: refSelf
 });
 </script>
 
@@ -91,13 +92,13 @@ defineExpose({
 
     min-width: max-content;
 
-    /* padding: auto; */
-
     font-size: 0.6rem;
 
     display: flex;
     align-items: center;
     justify-content: center;
     align-content: center;
+
+    margin: auto;
 }
 </style>

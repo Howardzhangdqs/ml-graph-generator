@@ -1,6 +1,6 @@
 <template>
     <div class="normal-tensor" ref="refSelf" :style="{
-        background: props.background,
+        background: props.background === 'default' ? colorStore.getColor('Tensor1') : props.background,
     }">
         <table class="normal-tensor-block">
             <tr v-for="col in props.col" :key="col">
@@ -20,6 +20,9 @@
 import { onMounted, onUnmounted, reactive, ref } from "vue";
 import { BoundingClientRect2KeyPoints, type KeyPoints } from "./getModulePosition";
 import noError from "@/utils/noError";
+import { useColorStore } from "@/stores/color";
+
+const colorStore = useColorStore();
 
 const props = withDefaults(defineProps<{
     color?: string,
@@ -39,7 +42,7 @@ const props = withDefaults(defineProps<{
 
     width: "18px",
     height: "20px",
-    background: "linear-gradient(145deg, rgb(217 250 255), rgb(109, 236, 255))",
+    background: "default",
     rotate: 0,
 });
 

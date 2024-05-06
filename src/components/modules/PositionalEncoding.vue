@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import PositionalTensor from "./PositionalTensor.vue";
-import FunctionalModule from "./FunctionalModule.vue";
+import FunctionalModule from "./Functional.vue";
 
 import { onMounted, reactive, ref, watchEffect } from "vue";
 import { type KeyPoints } from "./getModulePosition";

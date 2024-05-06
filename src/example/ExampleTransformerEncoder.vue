@@ -1,5 +1,5 @@
 <template>
-    <FlexColumn gap="0">
+    <FlexColumn ref="self" gap="0">
         <GapSpace height="2em" />
 
         <TextLabel :style="{
@@ -44,19 +44,20 @@
 <script setup lang="ts">
 import NormalModule from "@/components/modules/NormalModule.vue";
 import PositionalEncoding from "@/components/modules/PositionalEncoding.vue";
-import LayerBlock from "@/components/modules/LayerBlock.vue";
+import LayerBlock from "@/components/modules/Block.vue";
 import GapSpace from "@/components/comp/GapSpace.vue";
 import FlexColumn from "@/components/comp/FlexColumn.vue";
 import FlexRow from "@/components/comp/FlexRow.vue";
 import BlockContainer from "@/components/comp/BlockContainer.vue";
 
 import DrawArrow from "@/components/comp/DrawArrow";
-import { Transition, ref, watchEffect } from "vue";
+import { ref, watchEffect } from "vue";
 import { KeyPoints2Dictionary } from "@/components/modules/getModulePosition";
 import noError from "@/utils/noError";
-import TextLabel from "@/components/modules/TextLabel.vue";
-import type { transform } from "lodash";
+import TextLabel from "@/components/modules/Text.vue";
 import KeyPoints from "@/utils/KeyPoints";
+
+const self = ref<any>();
 
 const FeedForward = ref<any>();
 const MultiHeadAttention = ref<any>();
@@ -70,6 +71,7 @@ const svg = ref<any>();
 
 watchEffect(noError(() => {
     svg.value.innerHTML = "";
+    svg.value.style.height = `${(self.value.el as HTMLElement).parentElement?.clientHeight}px`;
 
     DrawArrow(
         svg.value,

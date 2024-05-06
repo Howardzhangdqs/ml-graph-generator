@@ -16,6 +16,7 @@ import MathDisplay from "../comp/MathDisplay.vue";
 import { BoundingClientRect2KeyPoints, type KeyPoints } from "./getModulePosition";
 import noError from "@/utils/noError";
 import log from "@/utils/log";
+import { useColorStore } from "@/stores/color";
 
 const props = withDefaults(defineProps<{
     /** 模块名 */
@@ -34,10 +35,12 @@ const props = withDefaults(defineProps<{
 }>(), {
     name: "Encoder",
     math: false,
-    color: "#6decff",
+    color: "default",
     skew: 0.2,
     rotate: 0,
 });
+
+const colorStore = useColorStore();
 
 const content = ref();
 
@@ -128,7 +131,7 @@ defineExpose({
 <style scoped>
 .encoder-block {
 
-    background-color: v-bind("props.color");
+    background-color: v-bind("props.color == 'default' ? colorStore.getColor(props.name) : props.color");
 
     margin: auto;
 

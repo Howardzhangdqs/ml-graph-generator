@@ -15,5 +15,6 @@ module.exports = {
         indent: [1, 4, { "SwitchCase": 1 }],
         semi: [1],
         quotes: [1, "double"],
+        "vue/multi-word-component-names": "off",
     },
 };

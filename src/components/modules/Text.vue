@@ -50,10 +50,8 @@ defineExpose({
 <style scoped>
 .normal-module {
 
-    padding: .2rem 1rem;
-    /* margin: .5em; */
-
-    border-radius: 0.5rem;
+    padding: 0;
+    margin: 0;
 
     width: auto;
 }
