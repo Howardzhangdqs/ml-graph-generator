@@ -61,7 +61,7 @@ onMounted(() => {
             keypoints.length = 0;
             BoundingClientRect2KeyPoints(domRect, keypoints);
             log(domRect, keypoints);
-        })
+        }) // damn, damn, damn. I put pair of bracket here and it cost me 2 hours to debug.
     );
 });
 
