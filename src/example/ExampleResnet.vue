@@ -55,11 +55,10 @@ import FlexRow from "@/components/comp/FlexRow.vue";
 import FlexColumn from "@/components/comp/FlexColumn.vue";
 
 import vSameWidth from "@/components/directives/vSameWidth";
-import { onMounted, ref, watchEffect } from "vue";
+import { ref, watchEffect } from "vue";
 import noError from "@/utils/noError";
 import DrawArrow from "@/components/comp/DrawArrow";
 import { KeyPoints2Dictionary } from "@/components/modules/getModulePosition";
-import execImmediately from "@/utils/execImmediately";
 import GapSpace from "@/components/comp/GapSpace.vue";
 import Functional from "@/components/modules/Functional.vue";
 import listAdd from "@/utils/listAdd";

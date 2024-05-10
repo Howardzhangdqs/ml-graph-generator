@@ -17,6 +17,7 @@ import { BoundingClientRect2KeyPoints, type KeyPoints } from "./getModulePositio
 import noError from "@/utils/noError";
 import log from "@/utils/log";
 import { useColorStore } from "@/stores/color";
+import resizeListener from "@/utils/resizeListener";
 
 const props = withDefaults(defineProps<{
     /** 模块名 */
@@ -49,23 +50,12 @@ const contentHeight = ref(0);
 
 
 onMounted(() => {
-
-    const ResizeCallback = () => {
-        contentWidth.value = content.value.offsetWidth;
-        contentHeight.value = content.value.offsetHeight;
-    };
-
-    const resizeObserver = new ResizeObserver(ResizeCallback);
-
-    resizeObserver.observe(content.value as Element);
-
-    ResizeCallback();
-
-    log(content.value);
-
-    onUnmounted(() => {
-        resizeObserver.unobserve(content.value as Element);
-    });
+    onUnmounted(
+        resizeListener(content.value, () => {
+            contentWidth.value = content.value.offsetWidth;
+            contentHeight.value = content.value.offsetHeight;
+        })
+    );
 });
 
 const refSelf = ref();
@@ -102,25 +92,17 @@ onMounted(() => {
         }
     };
 
-    const ResizeCallback = noError(() => {
-        log("Encoder resize");
-        domRect = (refSelf.value as HTMLDivElement).getBoundingClientRect();
-        keypoints.length = 0;
-        const raw_keypoints = BoundingClientRect2KeyPoints(domRect, []);
-        log(raw_keypoints);
+    onUnmounted(
+        resizeListener(refSelf.value, () => {
+            log("Encoder resize");
+            domRect = (refSelf.value as HTMLDivElement).getBoundingClientRect();
+            keypoints.length = 0;
+            const raw_keypoints = BoundingClientRect2KeyPoints(domRect, []);
+            log(raw_keypoints);
 
-        keypoints.push(...KeyPoint2Rotate(raw_keypoints));
-    });
-
-    const resizeObserver = new ResizeObserver(ResizeCallback);
-
-    resizeObserver.observe(refSelf.value as Element);
-
-    ResizeCallback();
-
-    onUnmounted(() => {
-        resizeObserver.unobserve(refSelf.value as Element);
-    });
+            keypoints.push(...KeyPoint2Rotate(raw_keypoints));
+        })
+    );
 });
 
 defineExpose({

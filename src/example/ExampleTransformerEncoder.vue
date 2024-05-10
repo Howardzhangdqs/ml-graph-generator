@@ -75,7 +75,8 @@ watchEffect(noError(() => {
 
     DrawArrow(
         svg.value,
-        KeyPoints(InputText.value).top, KeyPoints(InputEmbedding.value).bottom,
+        KeyPoints2Dictionary(InputText.value?.keypoints ?? []).top,
+        KeyPoints2Dictionary(InputEmbedding.value?.keypoints ?? []).bottom,
         "direct"
     );
 
@@ -86,14 +87,14 @@ watchEffect(noError(() => {
         "direct"
     );
 
+    const MHAKeyPoints = KeyPoints2Dictionary(MultiHeadAttention.value?.keypoints ?? []);
+
     DrawArrow(
         svg.value,
         KeyPoints2Dictionary(PositionalEncode.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(MultiHeadAttention.value?.keypoints ?? []).bottom,
+        MHAKeyPoints.bottom,
         "direct"
     );
-
-    const MHAKeyPoints = KeyPoints2Dictionary(MultiHeadAttention.value?.keypoints ?? []);
 
     DrawArrow(
         svg.value,
@@ -124,7 +125,6 @@ watchEffect(noError(() => {
     );
 
     const FeedForwardBottom = KeyPoints2Dictionary(FeedForward.value?.keypoints ?? []).bottom;
-    const FeedForwardTop = KeyPoints2Dictionary(FeedForward.value?.keypoints ?? []).top;
 
     DrawArrow(
         svg.value,
@@ -135,7 +135,7 @@ watchEffect(noError(() => {
 }));
 
 defineExpose({
-    AddAndNorm2
+    FeedForward
 });
 </script>
 

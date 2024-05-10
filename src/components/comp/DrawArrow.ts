@@ -89,10 +89,10 @@ export default (
 
     if (isEmpty(startingPoint) || isEmpty(endingPoint)) return;
 
-    // 创建一个当前点，初始值为起点
+    // Create a current point with the initial value of the starting point
     const currentPoint = [startingPoint[0], startingPoint[1]];
 
-    // 根据路线类型（直线或非直线）计算路线和路线2
+    // Calculate the route and route2 based on the type of the route (straight or non-straight)
     const [route, route2] = (routine !== "direct") ?
         Routine2AbsRoutine(startingPoint, endingPoint, routine, convex) :
         ([
@@ -102,10 +102,10 @@ export default (
 
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
-    // 初始化路径数据
+    // Initialize the path data
     let d = `M ${currentPoint[0]} ${currentPoint[1]} `;
 
-    // 遍历路线，生成路径数据
+    // Traverse the route and generate the path data
     for (let i = 0; i < route.length - 1; i++) {
         d += `L ${route[i][0] - Number2PlusMinus(route2[i][0]) * radius} ${route[i][1] - Number2PlusMinus(route2[i][1]) * radius}`;
         const midPointX = route[i][0] + Number2PlusMinus(route2[i + 1][0]) * radius;
@@ -113,7 +113,7 @@ export default (
         d += `Q ${route[i][0]} ${route[i][1]}, ${midPointX} ${midPointY} `;
     }
 
-    // 添加路径的最后一个点
+    // Add the last point of the path
     d += `L ${route[route.length - 1][0]} ${route[route.length - 1][1]}`;
 
     path.setAttribute("d", d);
@@ -123,21 +123,22 @@ export default (
 
     svgdom.appendChild(path);
 
-    // 创建箭头
+
+    // Create an arrowhead
     if (arrow) {
         const arrow = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
-        // 箭头的长度和宽度
+        // Arrow length and width
         const arrowLength = 8;
         const arrowWidth = 3;
 
-        // 获取路径的最后一个方向
+        // Get the last direction of the path
         const direction = route2[route2.length - 1];
 
-        // 计算箭头的角度
+        // Calculate the angle of the arrow
         const angle = (Math.atan2(direction[1], direction[0]) * 180 / Math.PI);
 
-        log(angle, route2, direction);
+        log("arrow", angle, route2, direction, endingPoint);
 
         const arrowPath = [
             `M ${endingPoint[0] - arrowLength} ${endingPoint[1] - arrowWidth}`,

@@ -21,6 +21,7 @@ import { onMounted, onUnmounted, reactive, ref } from "vue";
 import { BoundingClientRect2KeyPoints, type KeyPoints } from "./getModulePosition";
 import noError from "@/utils/noError";
 import { useColorStore } from "@/stores/color";
+import resizeListener from "@/utils/resizeListener";
 
 const colorStore = useColorStore();
 
@@ -50,23 +51,15 @@ const refSelf = ref();
 
 const keypoints = reactive<KeyPoints>([]);
 
-onMounted(noError(() => {
-    const ResizeCallback = noError(() => {
-        const domRect = (refSelf.value as HTMLDivElement).getBoundingClientRect();
-        keypoints.length = 0;
-        BoundingClientRect2KeyPoints(domRect, keypoints);
-    });
-
-    const resizeObserver = new ResizeObserver(ResizeCallback);
-
-    resizeObserver.observe(refSelf.value as Element);
-
-    ResizeCallback();
-
-    onUnmounted(() => {
-        resizeObserver.unobserve(refSelf.value as Element);
-    });
-}));
+onMounted(() => {
+    onUnmounted(
+        resizeListener(refSelf.value, () => {
+            const domRect = (refSelf.value as HTMLDivElement).getBoundingClientRect();
+            keypoints.length = 0;
+            BoundingClientRect2KeyPoints(domRect, keypoints);
+        })
+    );
+});
 
 defineExpose({
     keypoints

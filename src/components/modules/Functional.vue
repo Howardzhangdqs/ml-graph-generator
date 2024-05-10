@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="functional-module" ref="refSelf">
+        <div class="functional-module" ref="self">
             <MathDisplay :content="props.name" :math="props.math" ref="mathDisplay" />
         </div>
     </div>
@@ -12,6 +12,7 @@ import MathDisplay from "../comp/MathDisplay.vue";
 import { BoundingClientRect2KeyPoints, type KeyPoints } from "./getModulePosition";
 import noError from "@/utils/noError";
 import log from "@/utils/log";
+import resizeListener from "@/utils/resizeListener";
 
 const props = withDefaults(defineProps<{
     /** 模块名 */
@@ -49,32 +50,24 @@ onMounted(() => {
 });
 
 
-const refSelf = ref();
+const self = ref();
 
 const keypoints = reactive<KeyPoints>([]);
 
 onMounted(() => {
-    const ResizeCallback = noError(() => {
-        const domRect = (refSelf.value as HTMLDivElement).getBoundingClientRect();
-        keypoints.length = 0;
-        BoundingClientRect2KeyPoints(domRect, keypoints);
-        log(keypoints);
-    });
-
-    const resizeObserver = new ResizeObserver(ResizeCallback);
-
-    resizeObserver.observe(refSelf.value as Element);
-
-    ResizeCallback();
-
-    onUnmounted(noError(() => {
-        resizeObserver.unobserve(refSelf.value as Element);
-    }));
+    onUnmounted(
+        resizeListener(self.value, () => {
+            const domRect = (self.value as HTMLDivElement).getBoundingClientRect();
+            keypoints.length = 0;
+            BoundingClientRect2KeyPoints(domRect, keypoints);
+            log(domRect, keypoints);
+        })
+    );
 });
 
 defineExpose({
     keypoints,
-    el: refSelf
+    el: self
 });
 </script>
 
