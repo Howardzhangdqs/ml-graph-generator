@@ -12,7 +12,7 @@ import noError from "@/utils/noError";
 import resizeListener from "@/utils/resizeListener";
 
 const props = withDefaults(defineProps<{
-    /** 模块名 */
+    /** Module name */
     name?: string,
 
     math?: boolean,

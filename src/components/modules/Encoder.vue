@@ -20,18 +20,16 @@ import { useColorStore } from "@/stores/color";
 import resizeListener from "@/utils/resizeListener";
 
 const props = withDefaults(defineProps<{
-    /** 模块名 */
+    /** Module name */
     name?: string,
 
-    /** 是否启用数学 */
+    /** if math mode is enabled */
     math?: boolean,
 
     color?: string,
 
-    /** 倾斜度 */
     skew?: number,
 
-    /** 旋转角度 */
     rotate?: 0 | 1 | 2 | 3,
 }>(), {
     name: "Encoder",

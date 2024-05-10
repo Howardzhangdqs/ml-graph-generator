@@ -37,7 +37,7 @@ export const Routine2AbsRoutine = (
     res.push(convex ? [currentPoint[0], endingPoint[1]] : [endingPoint[0], currentPoint[1]]);
     res.push([endingPoint[0], endingPoint[1]]);
 
-    // 如果res中相邻连个元素相同，就删掉一个
+    // If two adjacent elements in res are the same, delete one
     res = res.filter((point, index) => {
         if (index === 0) return true;
         return !(point[0] === res[index - 1][0] && point[1] === res[index - 1][1]);

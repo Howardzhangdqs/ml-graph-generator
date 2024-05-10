@@ -5,7 +5,7 @@ const doms = new Map<string, HTMLDivElement[]>();
 const SameWidth = (el: HTMLDivElement, { value }: { value: string }) => {
     const hash = md5(value);
 
-    // 如果当前dom是最宽的，更新所有dom宽度
+    // If the current dom is the widest, update the width of all doms
     const updateWidth = (doms: HTMLDivElement[]) => {
         let maxWidth = 0;
         

@@ -14,7 +14,7 @@ import { useColorStore } from "@/stores/color";
 import resizeListener from "@/utils/resizeListener";
 
 const props = withDefaults(defineProps<{
-    /** 模块名 */
+    /** Module name */
     name?: string,
 
     color?: string,

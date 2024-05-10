@@ -15,7 +15,7 @@ import log from "@/utils/log";
 import resizeListener from "@/utils/resizeListener";
 
 const props = withDefaults(defineProps<{
-    /** 模块名 */
+    /** Module name */
     name?: string,
 
     color?: string,
@@ -31,7 +31,7 @@ const mathDisplay = ref();
 
 const contentSize = ref(1000);
 
-// 监听mathDisplay长宽
+// Listen to the width and height of mathDisplay
 onMounted(() => {
     const resizeObserver = new ResizeObserver(noError((entries) => {
         for (const entry of entries) {

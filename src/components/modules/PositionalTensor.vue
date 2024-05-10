@@ -45,7 +45,29 @@ defineExpose({
     position: relative;
 }
 
-/** 在左50%画一个上半圆 */
+/* Draw upper semicircle on the left */
+.yin-yang-left::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    border-radius: 50%;
+    background: black;
+    left: 0;
+    top: 0;
+}
+
+/* Draw lower semicircle on the right */
+.yin-yang-right::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    border-radius: 50%;
+    background: white;
+    right: 0;
+    top: 0;
+}
 .yin-yang-left {
     width: calc(50% - 1px);
     height: calc(50% - 1px);
