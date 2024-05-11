@@ -9,13 +9,15 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "publish": "node publish.js"
   },
   "dependencies": {
     "@types/katex": "^0.16.7",
     "@types/lodash": "^4.17.0",
     "@types/md5": "^2.3.5",
     "eslint-config-google": "^0.14.0",
+    "gh-pages": "^6.1.1",
     "katex": "^0.16.10",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
