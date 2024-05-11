@@ -10,7 +10,7 @@
         </FlexColumn>
 
         <GapSpace />
-        
+
         <FlexColumn>
             <GapSpace height="2rem" />
             <GapSpace height="210px" />
@@ -202,6 +202,12 @@ watchEffect(noError(() => {
     draw(
         KeyPoints2Dictionary(Fun12.value?.keypoints ?? []).right,
         KeyPoints2Dictionary(Fun22.value?.keypoints ?? []).top,
+        [], undefined, undefined, false
+    );
+
+    draw(
+        KeyPoints2Dictionary(Fun22.value?.keypoints ?? []).right,
+        KeyPoints2Dictionary(Fun42.value?.keypoints ?? []).top,
         [], undefined, undefined, false
     );
 
