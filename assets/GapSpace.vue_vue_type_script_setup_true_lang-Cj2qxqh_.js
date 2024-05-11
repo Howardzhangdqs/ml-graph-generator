@@ -1,1 +1,0 @@
-import{d as a,o,c as n,q as r}from"./index-D1Y1U64N.js";const p=a({__name:"GapSpace",props:{width:{default:"1rem"},height:{default:"1rem"}},setup(t){const e=t;return(s,c)=>(o(),n("div",{style:r({width:e.width,height:e.height})},null,4))}});export{p as _};
