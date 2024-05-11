@@ -26,6 +26,11 @@ export const routes = [
         name: "Lenet (Example)",
         component: () => import("@/example/ExampleLenet.vue"),
     },
+    {
+        path: "/lstm",
+        name: "LSTM (Example)",
+        component: () => import("@/example/ExampleLSTM.vue"),
+    }
 ];
 
 export const router = createRouter({

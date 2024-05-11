@@ -27,7 +27,6 @@
 </template>
 
 <script setup lang="ts">
-import DrawArrow from "@/components/comp/DrawArrow";
 import FlexColumn from "@/components/comp/FlexColumn.vue";
 import FlexRow from "@/components/comp/FlexRow.vue";
 import NormalModule from "@/components/modules/NormalModule.vue";
@@ -36,6 +35,7 @@ import { KeyPoints2Dictionary } from "@/components/modules/getModulePosition";
 import { useColorStore } from "@/stores/color";
 import noError from "@/utils/noError";
 import resizeSvg from "@/utils/resizeSvg";
+import useDrawArrow from "@/utils/useDrawArrow";
 import { ref, watchEffect } from "vue";
 
 const colorStore = useColorStore();
@@ -55,53 +55,41 @@ const module8 = ref<any>();
 watchEffect(noError(() => {
     resizeSvg(svg, container);
 
-    DrawArrow(
-        svg.value,
+    const { draw } = useDrawArrow(svg.value);
+
+    draw(
         KeyPoints2Dictionary(module1.value?.keypoints ?? []).right,
         KeyPoints2Dictionary(module2.value?.keypoints ?? []).left,
-        "direct"
     );
 
-    DrawArrow(
-        svg.value,
+    draw(
         KeyPoints2Dictionary(module2.value?.keypoints ?? []).right,
         KeyPoints2Dictionary(module3.value?.keypoints ?? []).left,
-        "direct"
     );
 
-    DrawArrow(
-        svg.value,
+    draw(
         KeyPoints2Dictionary(module3.value?.keypoints ?? []).right,
         KeyPoints2Dictionary(module4.value?.keypoints ?? []).left,
-        "direct"
     );
 
-    DrawArrow(
-        svg.value,
+    draw(
         KeyPoints2Dictionary(module4.value?.keypoints ?? []).right,
         KeyPoints2Dictionary(module5.value?.keypoints ?? []).left,
-        "direct"
     );
 
-    DrawArrow(
-        svg.value,
+    draw(
         KeyPoints2Dictionary(module5.value?.keypoints ?? []).right,
         KeyPoints2Dictionary(module6.value?.keypoints ?? []).left,
-        "direct"
     );
 
-    DrawArrow(
-        svg.value,
+    draw(
         KeyPoints2Dictionary(module6.value?.keypoints ?? []).right,
         KeyPoints2Dictionary(module7.value?.keypoints ?? []).left,
-        "direct"
     );
 
-    DrawArrow(
-        svg.value,
+    draw(
         KeyPoints2Dictionary(module7.value?.keypoints ?? []).right,
         KeyPoints2Dictionary(module8.value?.keypoints ?? []).left,
-        "direct"
     );
 }));
 </script>

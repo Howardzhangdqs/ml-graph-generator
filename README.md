@@ -24,5 +24,33 @@ pnpm build
 pnpm lint
 ```
 
-> [!WARNING]  
-> To improve the quality of the code, there may be some rude words in the docs and comments.
+
+## TODO
+
+
++ [x] Transformer
++ [ ] VGG
++ [ ] MobileNet
++ [ ] DenseNet
++ [ ] Inception
++ [ ] EfficientNet
++ [ ] AlexNet
++ [x] LeNet
++ [x] ResNet
++ [ ] GoogLeNet
++ [ ] ResNeXt
++ [ ] ShuffleNet
++ [ ] SENet
++ [ ] MobileNetV2
++ [ ] MobileNetV3
++ [ ] SqueezeNet
++ [ ] NASNet
++ [ ] PNASNet
++ [ ] MNASNet
++ [ ] RegNet
++ [ ] ResMLP
++ [ ] VisionTransformer
++ [ ] DeiT
++ [ ] ViT
++ [ ] CSPNet
++ [ ] DenseNet

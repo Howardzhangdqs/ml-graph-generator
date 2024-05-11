@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<{
     border: 2px solid #333;
 
     width: max-content !important;
-    
+
     display: flex;
 
     flex-direction: column;

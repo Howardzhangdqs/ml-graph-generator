@@ -39,6 +39,7 @@
             </FlexRow>
         </BlockContainer>
     </FlexColumn>
+    
     <svg ref="svg" class="mask"></svg>
 </template>
 
