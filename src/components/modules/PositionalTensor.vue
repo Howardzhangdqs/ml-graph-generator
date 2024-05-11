@@ -47,7 +47,7 @@ defineExpose({
 
 /* Draw upper semicircle on the left */
 .yin-yang-left::before {
-    content: "";
+    /* content: ""; */
     position: absolute;
     width: 50%;
     height: 100%;
@@ -59,7 +59,7 @@ defineExpose({
 
 /* Draw lower semicircle on the right */
 .yin-yang-right::before {
-    content: "";
+    /* content: ""; */
     position: absolute;
     width: 50%;
     height: 100%;

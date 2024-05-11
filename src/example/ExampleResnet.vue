@@ -1,14 +1,31 @@
 <template>
-    <FlexRow gap="2rem">
+    <FlexRow gap="2rem" ref="self">
+
+        <Text :style="{
+            position: 'absolute',
+            transform: 'translate(60px, 70px)',
+            fontSize: '.8rem',
+        }" name="f(\mathbf{x}) = g(\mathbf{x}) + \mathbf{x}" math />
+        <Text :style="{
+            position: 'absolute',
+            transform: 'translate(90px, 120px)',
+            fontSize: '.8rem',
+        }" name="f(\mathbf{x})" math />
+        <Text :style="{
+            position: 'absolute',
+            transform: 'translate(181px, 83px)',
+            fontSize: '.8rem',
+        }" name="\mathbf{x}" math />
+        <Text :style="{
+            position: 'absolute',
+            transform: 'translate(-160px, 120px)',
+            fontSize: '.8rem',
+        }" name="f(\mathbf{x})" math />
+
         <FlexColumn gap="2rem">
             <Text ref="res11" name="" />
             <NormalModule ref="res12" v-same-width="'1'" name="Activation function" />
             <GapSpace :height="`${FunctionalHeight}px`" />
-            <Text :style="{
-                position: 'fixed',
-                transform: 'translate(-50px, 120px)',
-                fontSize: '.8rem',
-            }" name="f(\mathbf{x})" math />
             <Block color="#0000"
                 style="background-color: #0000; border-style: dashed; border-radius: 0; padding: .5rem;">
                 <FlexColumn gap="1rem">
@@ -22,17 +39,7 @@
         <FlexColumn gap="2rem">
             <Text ref="res21" name="" />
             <NormalModule ref="res22" v-same-width="'1'" name="Activation function" />
-            <Text :style="{
-                position: 'fixed',
-                transform: 'translate(-65px, 70px)',
-                fontSize: '.8rem',
-            }" name="f(\mathbf{x}) = g(\mathbf{x}) + \mathbf{x}" math />
             <Functional ref="res27" name="\boldsymbol{+}" />
-            <Text :style="{
-                position: 'fixed',
-                transform: 'translate(-50px, 120px)',
-                fontSize: '.8rem',
-            }" name="f(\mathbf{x})" math />
             <Block color="#0000"
                 style="background-color: #0000; border-style: dashed; border-radius: 0; padding: .5rem;">
                 <FlexColumn gap="1rem">
@@ -62,6 +69,7 @@ import { KeyPoints2Dictionary } from "@/components/modules/getModulePosition";
 import GapSpace from "@/components/comp/GapSpace.vue";
 import Functional from "@/components/modules/Functional.vue";
 import listAdd from "@/utils/listAdd";
+import svgResize from "@/utils/resizeSvg";
 
 const res11 = ref<any>();
 const res12 = ref<any>();
@@ -79,11 +87,12 @@ const res26 = ref<any>();
 const res27 = ref<any>();
 
 const svg = ref<any>();
+const self = ref<any>();
 
 const FunctionalHeight = ref(0);
 
 watchEffect(noError(() => {
-    svg.value.innerHTML = "";
+    svgResize(svg, self);
 
     FunctionalHeight.value = res27.value?.el.offsetHeight ?? 0;
 

@@ -16,8 +16,13 @@
 
         <TextLabel :style="{
             position: 'absolute',
-            transform: 'translate(120px, 350px)',
+            transform: 'translate(116px, 349px)',
         }" name="\times N" math />
+        <TextLabel :style="{
+            position: 'absolute',
+            transform: 'translate(114px, 570px)'
+        }" name="Positional<br>Encoding" />
+
         <LayerBlock>
             <FlexRow>
                 <FlexColumn gap=".5rem">
@@ -37,10 +42,6 @@
         <BlockContainer>
             <FlexRow>
                 <FlexColumn gap=".5rem">
-                    <TextLabel :style="{
-                        position: 'fixed',
-                        transform: 'translate(124px, -4px)'
-                    }" name="Positional<br>Encoding" />
                     <PositionalEncoding ref="PositionalEncode"
                         style="margin: auto; width: auto; transform: rotate(180deg)" />
                     <NormalModule ref="InputEmbedding" name="Input Embedding" />
@@ -72,6 +73,7 @@ import TextLabel from "@/components/modules/Text.vue";
 import listAdd from "@/utils/listAdd";
 
 import vSameWidth from "@/components/directives/vSameWidth";
+import svgResize from "@/utils/resizeSvg";
 
 const self = ref<any>();
 
@@ -92,8 +94,7 @@ const Linear = ref<any>();
 const svg = ref<any>();
 
 watchEffect(noError(() => {
-    svg.value.innerHTML = "";
-    svg.value.style.height = `${(self.value.el as HTMLElement).parentElement?.clientHeight}px`;
+    svgResize(svg, self);
 
     DrawArrow(
         svg.value,

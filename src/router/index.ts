@@ -1,10 +1,10 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-const routes = [
+export const routes = [
     {
-        path: "/transformer",
-        name: "Transformer (Example)",
-        component: () => import("@/example/ExampleTransformer.vue"),
+        path: "/",
+        name: "Entry",
+        component: () => import("./Entry.vue"),
     },
     {
         path: "/modules",
@@ -12,9 +12,19 @@ const routes = [
         component: () => import("@/example/ExampleModule.vue"),
     },
     {
+        path: "/transformer",
+        name: "Transformer (Example)",
+        component: () => import("@/example/ExampleTransformer.vue"),
+    },
+    {
         path: "/resnet",
         name: "Resnet (Example)",
         component: () => import("@/example/ExampleResnet.vue"),
+    },
+    {
+        path: "/lenet",
+        name: "Lenet (Example)",
+        component: () => import("@/example/ExampleLenet.vue"),
     },
 ];
 

@@ -4,8 +4,13 @@
 
         <TextLabel :style="{
             position: 'relative',
-            transform: 'translate(-120px, 150px)'
+            transform: 'translate(-116px, 187px)'
         }" name="N\times" math />
+        <TextLabel :style="{
+            position: 'relative',
+            transform: 'translate(-114px, 303px)'
+        }" name="Positional<br>Encoding" />
+
         <LayerBlock>
             <FlexRow>
                 <GapSpace width="1.3em" />
@@ -23,10 +28,6 @@
             <FlexRow>
                 <GapSpace width="1.3em" />
                 <FlexColumn gap=".5rem">
-                    <TextLabel :style="{
-                        position: 'fixed',
-                        transform: 'translate(-124px, -4px)'
-                    }" name="Positional<br>Encoding" />
                     <PositionalEncoding ref="PositionalEncode" style="margin: auto; width: auto" />
                     <NormalModule ref="InputEmbedding" name="Input Embedding" />
                     <GapSpace />
@@ -55,7 +56,7 @@ import { ref, watchEffect } from "vue";
 import { KeyPoints2Dictionary } from "@/components/modules/getModulePosition";
 import noError from "@/utils/noError";
 import TextLabel from "@/components/modules/Text.vue";
-import KeyPoints from "@/utils/KeyPoints";
+import svgResize from "@/utils/resizeSvg";
 
 const self = ref<any>();
 
@@ -70,8 +71,7 @@ const InputText = ref<any>();
 const svg = ref<any>();
 
 watchEffect(noError(() => {
-    svg.value.innerHTML = "";
-    svg.value.style.height = `${(self.value.el as HTMLElement).parentElement?.clientHeight}px`;
+    svgResize(svg, self);
 
     DrawArrow(
         svg.value,
