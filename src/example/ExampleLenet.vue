@@ -1,15 +1,13 @@
 <template>
     <FlexColumn ref="container" :class="$style.container">
 
-        <div style="">
-            <template v-for="key in 6" :key>
-                <Text :style="{
-                    position: 'absolute',
-                    fontSize: '.8rem',
-                    transform: `translate(151px, calc(48px + ${key - 1} * 41.5px)) rotate(180deg)`,
-                }" :name="`Layer #${key}`" />
-            </template>
-        </div>
+        <template v-for="key in 6" :key>
+            <Text :style="{
+                position: 'absolute',
+                fontSize: '.8rem',
+                transform: `translate(-150px, calc(48px + ${key - 1} * 41.5px)) rotate(180deg)`,
+            }" :name="`Layer #${key}`" />
+        </template>
 
         <FlexRow>
             <FlexColumn gap=".8rem">
