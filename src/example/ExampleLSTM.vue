@@ -107,9 +107,10 @@ import Text from "@/components/modules/Text.vue";
 import { KeyPoints2Dictionary } from "@/components/modules/getModulePosition";
 import { useColorStore } from "@/stores/color";
 import noError from "@/utils/noError";
+import resizeListener from "@/utils/resizeListener";
 import resizeSvg from "@/utils/resizeSvg";
 import useDrawArrow from "@/utils/useDrawArrow";
-import { ref, watchEffect } from "vue";
+import { onMounted, onUnmounted, ref, watch, watchEffect } from "vue";
 
 const colorStore = useColorStore();
 const getColor = colorStore.getColor;
@@ -133,7 +134,7 @@ const Fun33 = ref<any>();
 const Fun41 = ref<any>();
 const Fun42 = ref<any>();
 
-watchEffect(noError(() => {
+const DrawArrow = noError(() => {
     resizeSvg(svg, container);
 
     const { draw } = useDrawArrow(svg.value);
@@ -173,7 +174,7 @@ watchEffect(noError(() => {
     );
 
     const ModuleHt1Right = KeyPoints2Dictionary(ModuleHt1.value?.keypoints ?? []).right;
-    const Fun41Left = KeyPoints2Dictionary(Fun41.value?.keypoints ?? []).left;
+    const Fun41Left = KeyPoints2Dictionary(Fun42.value?.keypoints ?? []).left;
 
     draw(
         [ModuleHt1Right[0], Fun41Left[1]],
@@ -218,7 +219,7 @@ watchEffect(noError(() => {
 
     draw(
         [KeyPoints2Dictionary(Fun42.value?.keypoints ?? []).right[0], Fun41Left[1]],
-        KeyPoints2Dictionary(ModuleHt2.value?.keypoints ?? []).left,
+        [KeyPoints2Dictionary(ModuleHt2.value?.keypoints ?? []).left[0], Fun41Left[1]],
     );
 
     draw(
@@ -226,7 +227,14 @@ watchEffect(noError(() => {
         KeyPoints2Dictionary(ModuleHt.value?.keypoints ?? []).bottom,
         []
     );
-}));
+});
+
+watchEffect(DrawArrow);
+
+onMounted(() => {
+    onUnmounted(resizeListener(container.value, DrawArrow));
+    setTimeout(DrawArrow, 1000);
+});
 </script>
 
 <style scoped>

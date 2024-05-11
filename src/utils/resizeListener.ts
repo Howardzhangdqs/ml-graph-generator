@@ -39,8 +39,7 @@ export default noError((
 
     resize_callback();
 
-    // 
-    // setTimeout(resize_callback, 500);
+    setTimeout(resize_callback, 500);
     
     return () => {
         window.removeEventListener("resize", resize_callback);

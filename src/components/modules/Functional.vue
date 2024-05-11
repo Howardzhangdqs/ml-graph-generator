@@ -33,21 +33,24 @@ const contentSize = ref(1000);
 
 // Listen to the width and height of mathDisplay
 onMounted(() => {
-    const resizeObserver = new ResizeObserver(noError((entries) => {
-        for (const entry of entries) {
-            const { width, height } = entry.contentRect;
-            contentSize.value = Math.max(width, height);
-            log(contentSize.value);
-        }
-    }));
 
-    contentSize.value = Math.max(
-        (mathDisplay.value?.dom as HTMLDivElement).offsetWidth as number ?? 0,
-        (mathDisplay.value?.dom as HTMLDivElement).offsetHeight as number ?? 0,
-    ) ?? 0;
+    const resize_callback = noError(() => {
+        const el = mathDisplay.value.$el;
+        contentSize.value = Math.max(
+            el.offsetWidth as number ?? 0,
+            el.offsetHeight as number ?? 0,
+        ) ?? 0;
+    });
+
+    const resizeObserver = new ResizeObserver(resize_callback);
+
+    window.addEventListener("resize", resize_callback);
+
+    resize_callback();
 
     resizeObserver.observe(mathDisplay.value.$el);
 });
+
 
 
 const self = ref();
