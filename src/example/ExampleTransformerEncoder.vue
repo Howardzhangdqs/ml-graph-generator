@@ -76,15 +76,15 @@ watchEffect(noError(() => {
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(InputText.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(InputEmbedding.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(InputText.value?.keypoints).top,
+        KeyPoints2Dictionary(InputEmbedding.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(InputEmbedding.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(PositionalEncode.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(InputEmbedding.value?.keypoints).top,
+        KeyPoints2Dictionary(PositionalEncode.value?.keypoints).bottom,
         "direct"
     );
 
@@ -92,7 +92,7 @@ watchEffect(noError(() => {
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(PositionalEncode.value?.keypoints ?? []).top,
+        KeyPoints2Dictionary(PositionalEncode.value?.keypoints).top,
         MHAKeyPoints.bottom,
         "direct"
     );
@@ -114,23 +114,23 @@ watchEffect(noError(() => {
     DrawArrow(
         svg.value,
         [MHAKeyPoints.bottom[0], MHAKeyPoints.bottom[1] + 35],
-        KeyPoints2Dictionary(AddAndNorm1.value?.keypoints ?? []).left,
+        KeyPoints2Dictionary(AddAndNorm1.value?.keypoints).left,
         [[-90, 0]], undefined, undefined, true
     );
 
     DrawArrow(
         svg.value,
         MHAKeyPoints.top,
-        KeyPoints2Dictionary(FeedForward.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(FeedForward.value?.keypoints).bottom,
         "direct", undefined, undefined, true
     );
 
-    const FeedForwardBottom = KeyPoints2Dictionary(FeedForward.value?.keypoints ?? []).bottom;
+    const FeedForwardBottom = KeyPoints2Dictionary(FeedForward.value?.keypoints).bottom;
 
     DrawArrow(
         svg.value,
         [FeedForwardBottom[0], FeedForwardBottom[1] + 18],
-        KeyPoints2Dictionary(AddAndNorm2.value?.keypoints ?? []).left,
+        KeyPoints2Dictionary(AddAndNorm2.value?.keypoints).left,
         [[-90, 0]], undefined, undefined, true
     );
 }));

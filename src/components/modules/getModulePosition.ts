@@ -60,7 +60,8 @@ export const BoundingClientRect2KeyPoints = noError((rect: DOMRect, target: KeyP
 }, []);
 
 
-export const KeyPoints2Dictionary = noError((keyPoints: KeyPoints): { [key: string]: [number, number] } => {
+export const KeyPoints2Dictionary = noError((_keyPoints: KeyPoints): { [key: string]: [number, number] } => {
+    const keyPoints = _keyPoints ?? [];
     const dict: { [key: string]: [number, number] } = {};
     keyPoints.forEach((keyPoint) => {
         dict[keyPoint.type] = keyPoint.pos;

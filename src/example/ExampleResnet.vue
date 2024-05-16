@@ -100,36 +100,36 @@ watchEffect(noError(() => {
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(res16.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(res15.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(res16.value?.keypoints).top,
+        KeyPoints2Dictionary(res15.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(res15.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(res14.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(res15.value?.keypoints).top,
+        KeyPoints2Dictionary(res14.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(res14.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(res13.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(res14.value?.keypoints).top,
+        KeyPoints2Dictionary(res13.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(res13.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(res12.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(res13.value?.keypoints).top,
+        KeyPoints2Dictionary(res12.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(res12.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(res11.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(res12.value?.keypoints).top,
+        KeyPoints2Dictionary(res11.value?.keypoints).bottom,
         "direct"
     );
 
@@ -137,43 +137,43 @@ watchEffect(noError(() => {
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(res26.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(res25.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(res26.value?.keypoints).top,
+        KeyPoints2Dictionary(res25.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(res25.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(res24.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(res25.value?.keypoints).top,
+        KeyPoints2Dictionary(res24.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(res24.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(res23.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(res24.value?.keypoints).top,
+        KeyPoints2Dictionary(res23.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(res23.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(res22.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(res23.value?.keypoints).top,
+        KeyPoints2Dictionary(res22.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(res22.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(res21.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(res22.value?.keypoints).top,
+        KeyPoints2Dictionary(res21.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        listAdd(KeyPoints2Dictionary(res26.value?.keypoints ?? []).top, [0, -15]),
-        KeyPoints2Dictionary(res27.value?.keypoints ?? []).right,
+        listAdd(KeyPoints2Dictionary(res26.value?.keypoints).top, [0, -15]),
+        KeyPoints2Dictionary(res27.value?.keypoints).right,
         [[125, 0]], undefined, undefined, true
     );
 

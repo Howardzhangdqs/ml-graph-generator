@@ -5,12 +5,13 @@
             <Text :style="{
                 position: 'absolute',
                 fontSize: '.8rem',
-                transform: `translate(-150px, calc(48px + ${key - 1} * 41.5px)) rotate(180deg)`,
+                transform: `translate(-150px, calc(48px + ${key - 1} * 41px)) rotate(180deg)`,
             }" :name="`Layer #${key}`" />
         </template>
 
         <FlexRow>
             <FlexColumn gap=".8rem">
+
                 <NormalModule ref="module1" name="Input: 32×32" />
                 <NormalModule ref="module2" name="Convolution (6@28×28)" :color="colorStore.getColor('Convolution')" />
                 <NormalModule ref="module3" name="Subsampling (6@14×14)" :color="colorStore.getColor('Subsampling')" />
@@ -58,38 +59,38 @@ watchEffect(noError(() => {
     const { draw } = useDrawArrow(svg.value);
 
     draw(
-        KeyPoints2Dictionary(module1.value?.keypoints ?? []).right,
-        KeyPoints2Dictionary(module2.value?.keypoints ?? []).left,
+        KeyPoints2Dictionary(module1.value?.keypoints).right,
+        KeyPoints2Dictionary(module2.value?.keypoints).left,
     );
 
     draw(
-        KeyPoints2Dictionary(module2.value?.keypoints ?? []).right,
-        KeyPoints2Dictionary(module3.value?.keypoints ?? []).left,
+        KeyPoints2Dictionary(module2.value?.keypoints).right,
+        KeyPoints2Dictionary(module3.value?.keypoints).left,
     );
 
     draw(
-        KeyPoints2Dictionary(module3.value?.keypoints ?? []).right,
-        KeyPoints2Dictionary(module4.value?.keypoints ?? []).left,
+        KeyPoints2Dictionary(module3.value?.keypoints).right,
+        KeyPoints2Dictionary(module4.value?.keypoints).left,
     );
 
     draw(
-        KeyPoints2Dictionary(module4.value?.keypoints ?? []).right,
-        KeyPoints2Dictionary(module5.value?.keypoints ?? []).left,
+        KeyPoints2Dictionary(module4.value?.keypoints).right,
+        KeyPoints2Dictionary(module5.value?.keypoints).left,
     );
 
     draw(
-        KeyPoints2Dictionary(module5.value?.keypoints ?? []).right,
-        KeyPoints2Dictionary(module6.value?.keypoints ?? []).left,
+        KeyPoints2Dictionary(module5.value?.keypoints).right,
+        KeyPoints2Dictionary(module6.value?.keypoints).left,
     );
 
     draw(
-        KeyPoints2Dictionary(module6.value?.keypoints ?? []).right,
-        KeyPoints2Dictionary(module7.value?.keypoints ?? []).left,
+        KeyPoints2Dictionary(module6.value?.keypoints).right,
+        KeyPoints2Dictionary(module7.value?.keypoints).left,
     );
 
     draw(
-        KeyPoints2Dictionary(module7.value?.keypoints ?? []).right,
-        KeyPoints2Dictionary(module8.value?.keypoints ?? []).left,
+        KeyPoints2Dictionary(module7.value?.keypoints).right,
+        KeyPoints2Dictionary(module8.value?.keypoints).left,
     );
 }));
 </script>

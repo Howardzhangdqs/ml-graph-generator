@@ -98,29 +98,29 @@ watchEffect(noError(() => {
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(InputText.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(InputEmbedding.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(InputText.value?.keypoints).top,
+        KeyPoints2Dictionary(InputEmbedding.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(InputEmbedding.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(PositionalEncode.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(InputEmbedding.value?.keypoints).top,
+        KeyPoints2Dictionary(PositionalEncode.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(PositionalEncode.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(MaskedMultiHeadAttention.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(PositionalEncode.value?.keypoints).top,
+        KeyPoints2Dictionary(MaskedMultiHeadAttention.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(MultiHeadAttention.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(FeedForward.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(MultiHeadAttention.value?.keypoints).top,
+        KeyPoints2Dictionary(FeedForward.value?.keypoints).bottom,
         "direct"
     );
 
@@ -143,44 +143,44 @@ watchEffect(noError(() => {
     DrawArrow(
         svg.value,
         [MHAKeyPoints.bottom[0], MHAKeyPoints.bottom[1] + 35],
-        KeyPoints2Dictionary(AddAndNorm1.value?.keypoints ?? []).right,
+        KeyPoints2Dictionary(AddAndNorm1.value?.keypoints).right,
         [[90, 0]], undefined, undefined, true
     );
 
     DrawArrow(
         svg.value,
         MHAKeyPoints.top,
-        listAdd(KeyPoints2Dictionary(MultiHeadAttention.value?.keypoints ?? []).bottom, [40, 0]),
+        listAdd(KeyPoints2Dictionary(MultiHeadAttention.value?.keypoints).bottom, [40, 0]),
         [[0, -55]], undefined, undefined, false
     );
 
-    const FeedForwardBottom = KeyPoints2Dictionary(FeedForward.value?.keypoints ?? []).bottom;
+    const FeedForwardBottom = KeyPoints2Dictionary(FeedForward.value?.keypoints).bottom;
 
     DrawArrow(
         svg.value,
         [FeedForwardBottom[0], FeedForwardBottom[1] + 18],
-        KeyPoints2Dictionary(AddAndNorm3.value?.keypoints ?? []).right,
+        KeyPoints2Dictionary(AddAndNorm3.value?.keypoints).right,
         [[90, 0]], undefined, undefined, true
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(FeedForward.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(Linear.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(FeedForward.value?.keypoints).top,
+        KeyPoints2Dictionary(Linear.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(Linear.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(Softmax.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(Linear.value?.keypoints).top,
+        KeyPoints2Dictionary(Softmax.value?.keypoints).bottom,
         "direct"
     );
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(Softmax.value?.keypoints ?? []).top,
-        KeyPoints2Dictionary(OutputProbabilities.value?.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(Softmax.value?.keypoints).top,
+        KeyPoints2Dictionary(OutputProbabilities.value?.keypoints).bottom,
         "direct"
     );
 }));

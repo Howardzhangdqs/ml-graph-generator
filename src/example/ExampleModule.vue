@@ -1,5 +1,8 @@
 <template>
     <div class="container">
+        {{ $t("messages.info") }}
+    </div>
+    <div class="container">
         <ModuleDisplay name="NormalModule">
             <NormalModule ref="refNormalModule" />
         </ModuleDisplay>
@@ -121,6 +124,7 @@ window.addEventListener("resize", execImmediately(() => {
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
+    margin: 1rem;
 }
 
 .keypoints {

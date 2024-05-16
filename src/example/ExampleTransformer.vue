@@ -33,15 +33,15 @@ watchEffect(noError(() => {
 
     DrawArrow(
         svg.value,
-        KeyPoints2Dictionary(TransformerEncoder.value?.FeedForward.keypoints ?? []).top,
-        KeyPoints2Dictionary(TransformerDncoder.value?.MultiHeadAttention.keypoints ?? []).bottom,
+        KeyPoints2Dictionary(TransformerEncoder.value?.FeedForward.keypoints).top,
+        KeyPoints2Dictionary(TransformerDncoder.value?.MultiHeadAttention.keypoints).bottom,
         [[0, -63], [99, 0], [0, 93]]
     );
 
     DrawArrow(
         svg.value,
-        listAdd(KeyPoints2Dictionary(TransformerEncoder.value?.FeedForward.keypoints ?? []).top, [120, 93 - 63]),
-        listAdd(KeyPoints2Dictionary(TransformerDncoder.value?.MultiHeadAttention.keypoints ?? []).bottom, [-40, 0]),
+        listAdd(KeyPoints2Dictionary(TransformerEncoder.value?.FeedForward.keypoints).top, [120, 93 - 63]),
+        listAdd(KeyPoints2Dictionary(TransformerDncoder.value?.MultiHeadAttention.keypoints).bottom, [-40, 0]),
         [],
         undefined, undefined, false
     );

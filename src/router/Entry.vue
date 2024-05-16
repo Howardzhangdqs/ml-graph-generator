@@ -1,6 +1,6 @@
 <template>
     <template v-for="(item, key) in entries" :key>
-        <RouterLink :to="item.path">
+        <RouterLink :to="item.path" target="_blank">
             <div :class="$style.btn">
                 {{ item.name }}
             </div>
