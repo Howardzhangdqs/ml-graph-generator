@@ -47,5 +47,7 @@ defineExpose({
     margin: 0;
 
     width: auto;
+
+    text-align: center;
 }
 </style>

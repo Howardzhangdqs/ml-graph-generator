@@ -39,6 +39,10 @@
         <ModuleDisplay name="NormalTensor">
             <NormalTensor ref="refNormalTensor" />
         </ModuleDisplay>
+
+        <ModuleDisplay name="Image">
+            <Image ref="refImage" />
+        </ModuleDisplay>
     </div>
     <div class="keypoints">
         <div class="keypoints-point" v-for="(point, key) in keypoints" :key="key" :style="{
@@ -61,6 +65,7 @@ import LayerBlock from "@/components/modules/Block.vue";
 import PositionalEncoding from "@/components/modules/PositionalEncoding.vue";
 import PositionalTensor from "@/components/modules/PositionalTensor.vue";
 import NormalTensor from "@/components/modules/Tensor.vue";
+import Image from "@/components/modules/Image.vue";
 
 import type { KeyPoints } from "@/components/modules/getModulePosition";
 

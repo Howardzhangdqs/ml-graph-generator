@@ -1,35 +1,24 @@
 <template>
-    <div>
-        <div class="normal-module" ref="refSelf" :style="styles">
-            <MathDisplay :content="props.name" :math="props.math" />
-        </div>
-    </div>
+    <img class="image-module" :src="props.src" alt="Image" ref="refSelf" />
 </template>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, reactive, ref } from "vue";
-import MathDisplay from "../comp/MathDisplay.vue";
 import { BoundingClientRect2KeyPoints, type KeyPoints } from "./getModulePosition";
-import { useColorStore } from "@/stores/color";
 import resizeListener from "@/utils/resizeListener";
 
 const props = withDefaults(defineProps<{
     /** Module name */
     name?: string,
-
-    color?: string,
-
-    math?: boolean,
-
-    styles?: any,
+    src?: string,
+    width?: string,
+    height?: string,
 }>(), {
-    name: "Liner",
-    color: "default",
-    math: false,
-    styles: {}
+    name: "Image",
+    src: "/vit/example.jpg",
+    width: "50px",
+    height: "50px",
 });
-
-const colorStore = useColorStore();
 
 const refSelf = ref();
 
@@ -51,19 +40,9 @@ defineExpose({
 </script>
 
 <style scoped>
-.normal-module {
-    background-color: v-bind("props.color == 'default' ? colorStore.getColor(props.name) : props.color");
-
-    padding: .2rem 1rem;
-    /* margin: .5em; */
-
-    border-radius: 0.5rem;
-    border: 2px solid #333;
-
-    width: auto;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.image-module {
+    width: v-bind("props.width");
+    height: v-bind("props.height");
+    vertical-align: middle;
 }
 </style>

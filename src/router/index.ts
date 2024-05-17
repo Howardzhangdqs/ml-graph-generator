@@ -30,6 +30,11 @@ export const routes = [
         path: "/lstm",
         name: "LSTM (Example)",
         component: () => import("@/example/ExampleLSTM.vue"),
+    },
+    {
+        path: "/vit",
+        name: "ViT (Example)",
+        component: () => import("@/example/ExampleViT/index.vue"),
     }
 ];
 

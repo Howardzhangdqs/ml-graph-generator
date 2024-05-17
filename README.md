@@ -1,9 +1,9 @@
 # Deeplearning Graph Generator
 
 <p align="center">
-    <a href="./examples.md">Examples</a>
+    <a href="./examples.md" target="_blank">Examples</a>
     ·
-    <a href="https://howardzhangdqs.github.io/ml-graph-generator/">Live Demo</a>
+    <a href="https://howardzhangdqs.github.io/ml-graph-generator/" target="_blank">Live Demo</a>
 </p>
 
 ## Project Setup
