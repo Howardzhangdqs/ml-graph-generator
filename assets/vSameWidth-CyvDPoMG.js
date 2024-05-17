@@ -1,1 +1,0 @@
-import{m}from"./NormalModule-DQ00dE5k.js";const s=new Map,n=(o,{value:i})=>{const t=m(i),c=a=>{let e=0;a.forEach(h=>{const d=h.offsetWidth;d>e&&(e=d)}),a.forEach(h=>{h.style.width=e+"px"})};s.has(t)?(s.get(t).push(o),c(s.get(t))):s.set(t,[o])},p={mounted:n};export{p as v};

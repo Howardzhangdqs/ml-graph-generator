@@ -1,0 +1,1 @@
+import{D as c}from"./resizeSvg-C3Y33rEr.js";import{n as t}from"./NormalModule-DA1CQck8.js";const u=r=>{const e=t((i,a,n="direct",s=10,l=!0,w=!1)=>{c(r,i,a,n,s,l,w)}),o=t(()=>{for(;r.firstChild;)r.removeChild(r.firstChild)});return{draw:e,clean:o}};export{u};
