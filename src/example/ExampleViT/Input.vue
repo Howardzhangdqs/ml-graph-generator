@@ -32,7 +32,7 @@
                         <td>
                             <div style="direction: rtl;">
                                 <Image ref="img" style="margin: auto;" width="2rem" height="2rem"
-                                    :src="`/vit/example_${i - 1}_${j - 1}.jpg`" />
+                                    :src="useImageUrl(i - 1, j - 1)" />
                             </div>
                         </td>
                     </template>
@@ -45,11 +45,11 @@
 </template>
 
 <script setup lang="ts">
-import GapSpace from "@/components/comp/GapSpace.vue";
 import MathDisplay from "@/components/comp/MathDisplay.vue";
 import Image from "@/components/modules/Image.vue";
 import NormalModule from "@/components/modules/NormalModule.vue";
 import { useColorStore } from "@/stores/color";
+import useImageUrl from "./useImageUrl";
 
 const colorStore = useColorStore();
 
@@ -82,7 +82,7 @@ watchEffect(noError(() => {
     // 获取中点
     const patch_middle = patch_dom.left + patch_dom.width / 2;
 
-    console.log(keypoints, patch_middle, patch_dom.top);
+    // console.log(keypoints, patch_middle, patch_dom.top);
 
     keypoints.forEach((keypoint) => {
         draw(
