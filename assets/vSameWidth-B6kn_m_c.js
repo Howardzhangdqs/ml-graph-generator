@@ -1,1 +1,0 @@
-import{m as c}from"./NormalModule-BIgHA59H.js";const f=(s,o)=>s.map((t,a)=>t+o[a]),e=new Map,m=(s,{value:o})=>{const t=c(o),a=i=>{let h=0;i.forEach(d=>{const n=d.offsetWidth;n>h&&(h=n)}),i.forEach(d=>{d.style.width=h+"px"})};e.has(t)?(e.get(t).push(s),a(e.get(t))):e.set(t,[s])},p={mounted:m};export{f as l,p as v};
